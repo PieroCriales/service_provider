@@ -16,7 +16,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('profile.update') }}">
                         @method('PUT')
 
                         @csrf

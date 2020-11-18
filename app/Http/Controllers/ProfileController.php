@@ -97,7 +97,15 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        //
+        $user = \Auth::user();
+
+        $profile = Profile::where('user_id', '=', \Auth::user()->id)->first();
+        $profile->firstname = $request->input('firstname', '');
+        $profile->lastname = $request->input('lastname', '');
+        $profile->address = $request->input('address', '');
+        $profile->save();
+
+        return view('home');
     }
 
     /**
