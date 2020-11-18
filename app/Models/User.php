@@ -48,4 +48,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Profile');
     }
+
+    /**
+     * Get the services record associated with the user
+     */
+    public function service()
+    {
+        return $this->hasMany('App\Service');
+    }
 }
