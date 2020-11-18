@@ -99,6 +99,21 @@
                         </div>
                     </form>
                 </div>
+                <div class="card-body">
+                    <div class="float-right">
+                        <form method="POST" action="{{ route('user.destroy') }}">
+                          @method('DELETE')
+                          @csrf
+                          <div class="col-md-6">
+                              <input
+                                  class="btn btn-sn btn-danger"
+                                  type="submit"
+                                  value="Eliminar"
+                                  onclick="return confirm('¿Desea eliminar su cuenta de usuario?')">
+                          </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

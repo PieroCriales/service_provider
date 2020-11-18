@@ -26,3 +26,8 @@ Route::get('profile/create', [App\Http\Controllers\ProfileController::class, 'cr
 Route::post('profile', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store')->middleware('auth');
 Route::get('profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::put('profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+/* == Finaliza rutas para perfil de usuario == */
+
+/* Inicia ruta para eliminar usuario */
+Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
+/* == Finaliza ruta para eliminar usuario == */
