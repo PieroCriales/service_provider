@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -78,7 +79,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('services.edit', compact('service'));
     }
 
     /**
@@ -90,7 +91,34 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $fields = [
+            'title'=> 'required|string|max:100',
+            'description'=> 'string',
+            'price'=> 'required|regex:/^[0-9]+(\.[0-9]{1,3})?$/',
+            'picture_path'=>'max:10000|mimes:jpeg,png,jpg'
+        ];
+
+        if($request->hasFile('picture_path')){
+
+            $fields += ['picture_path'=>'max:10000|mimes:jpeg,png,jpg'];
+
+        }
+
+        $message = ["required"=>' :attribute es requerido' ];
+
+        $this->validate($request, $fields, $message);
+
+        $dataService = request()->except(['_token','_method']);
+
+
+        if($request->hasFile('picture_path')){
+            Storage::delete('public/'.$service->picture_path);
+            $dataService['picture_path'] = $request->file('picture_path')->store('uploads','public');
+        }
+
+        $service->update($dataService);
+
+        return redirect('service')->with('message','Información modificada con exito');
     }
 
     /**
