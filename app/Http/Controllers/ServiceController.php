@@ -129,6 +129,9 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        if(Storage::delete('public/'.$service->picture_path)){
+            $service->delete();
+        }
+        return redirect('service')->with('message','Servicio eliminado');
     }
 }
