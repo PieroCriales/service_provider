@@ -32,3 +32,9 @@ Route::put('profile/update', [App\Http\Controllers\ProfileController::class, 'up
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */
+
+Auth::routes();
+
+Route::get('/home', function() {
+    return view('home');
+})->name('home')->middleware('auth');
