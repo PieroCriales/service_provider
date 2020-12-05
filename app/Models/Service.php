@@ -17,4 +17,12 @@ class Service extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Get the posts for the service.
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
 }
