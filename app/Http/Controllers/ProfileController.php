@@ -102,10 +102,12 @@ class ProfileController extends Controller
         $profile = Profile::where('user_id', '=', \Auth::user()->id)->first();
         $profile->firstname = $request->input('firstname', '');
         $profile->lastname = $request->input('lastname', '');
+        $profile->phone_number = $request->input('phone_number', '');
         $profile->address = $request->input('address', '');
+        $profile->profession = $request->input('profession', '');
         $profile->save();
 
-        return view('home');
+        return redirect('profile/edit');
     }
 
     /**
