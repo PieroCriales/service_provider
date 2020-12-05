@@ -232,9 +232,10 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
+            'text' => 'Buscar Servicio',
             'search' => true,
             'topnav' => true,
+            'input_name' => 'buscar',
         ],
         [
             'text' => 'blog',

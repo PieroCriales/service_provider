@@ -11,12 +11,17 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::where('user_id', \Auth::user()->id)->paginate(3);
-        return view('services.index', compact('services'));
+        $search = $request->get('buscar');
+        $services = Service::where('user_id', \Auth::user()->id)->search($search)->paginate(3);
+        return view('services.index', [
+            "services" => $services,
+            "busqueda" => $search
+        ]);
     }
 
     /**
