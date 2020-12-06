@@ -38,7 +38,7 @@
                         <img src="{{asset('storage').'/'.$service->picture_path}}" class="img-thumbnail img-fluid" alt="" width="200">
                     </td>
                     <td> <a href="{{route('service.show', $service)}}">{{$service->title}}</a></td>
-                    <td> <a href="#">{{$service->user->profile->firstname . " " . $service->user->profile->lastname}}</a></td>
+                    <td> <a href="{{ route('profile.show', $service->user->profile ) }}">{{$service->user->profile->firstname . " " . $service->user->profile->lastname}}</a></td>
                     <td>{{$service->price}}</td>
                     <td>{{$service->description}}</td>
                 </tr>
