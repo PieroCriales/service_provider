@@ -29,7 +29,12 @@ Route::get('profile/edit', [App\Http\Controllers\ProfileController::class, 'edit
 Route::put('profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 /* == Finaliza rutas para perfil de usuario == */
 
+/* Inicia rutas para sistema de comunicacion en perfil servicio */
 Route::post('post', [App\Http\Controllers\PostController::class, 'store'])->name('post.store')->middleware('auth');
+Route::post('comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store')->middleware('auth');
+/* Fin de rutas para comunicacion en perfil servicio */
+
+Route::get('profile/{profile}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
