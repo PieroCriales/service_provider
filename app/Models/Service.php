@@ -27,4 +27,12 @@ class Service extends Model
                 ->orWhere('description','LIKE',"%$search%");
         }
     }
+
+    /**
+     * Get the posts for the service.
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
 }
