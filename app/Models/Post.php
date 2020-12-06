@@ -20,4 +20,12 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\Service');
     }
+
+    /**
+     * Get the user that owns the post.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

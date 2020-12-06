@@ -48,8 +48,6 @@
                                 </ul>
                             </div>
                         </div>
-
-
                     </div>
                     <h3>Precio</h3>
                     <div class="bg-green py-2 px-3 mt-4">
@@ -64,7 +62,33 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <nav class="w-100">
+                        <div class="nav nav-tabs" id="product-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" role="tab" aria-controls="product-desc" aria-selected="true" href="#">Comentarios</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content p-3" id="nav-tabContent">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="form-horizontal" action="{{ route('post.store') }}" method="post">
+                                    {{csrf_field()}}
+                                    <div class="input-group input-group-sm mb-0">
+                                        <input class="form-control form-control-sm" type="text" name="body" id="" placeholder="Consultanos aquí...">
+                                        <input type="hidden" name="service_id" id="" value="{{ $service->id }}">
+                                        <input type="hidden" name="user_id" id="" value="{{ \Auth::user()->id }}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">Enviar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show active" role="tabpanel">
+                            @include('posts.index')
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 @stop
