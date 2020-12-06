@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::resource('service', '\App\Http\Controllers\ServiceController')->middleware('auth');
 
 /* Inicia rutas para perfil de usuario */
@@ -32,9 +32,3 @@ Route::put('profile/update', [App\Http\Controllers\ProfileController::class, 'up
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */
-
-Auth::routes();
-
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');

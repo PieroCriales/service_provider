@@ -16,14 +16,10 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('user_id')->unsigned();
-
             $table->string('title');
             $table->text('description');
             $table->double('price', 8, 2);
             $table->string('picture_path');
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });
