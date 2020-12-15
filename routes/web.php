@@ -31,6 +31,7 @@ Route::put('profile/update', [App\Http\Controllers\ProfileController::class, 'up
 
 /* Inicia rutas para sistema de comunicacion en perfil servicio */
 Route::post('post', [App\Http\Controllers\PostController::class, 'store'])->name('post.store')->middleware('auth');
+Route::post('comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store')->middleware('auth');
 /* Fin de rutas para comunicacion en perfil servicio */
 
 Route::get('profile/{profile}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
