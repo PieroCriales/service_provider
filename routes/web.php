@@ -39,3 +39,9 @@ Route::get('profile/{profile}', [App\Http\Controllers\ProfileController::class, 
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */
+
+/* Inicia rutas de Pago en Paypal */
+Route::get('/paypal/pay', [App\Http\Controllers\PaymentController::class,'payWithPaypal']);
+/* == Finaliza ruta de Pago en Paypal == */
+
+Route::get('/test',[App\Http\Controllers\PaymentController::class],'start');
