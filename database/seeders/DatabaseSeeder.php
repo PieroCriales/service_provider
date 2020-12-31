@@ -1,8 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\User;
+use App\Models\Service;
+use App\Models\Profile;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+       Storage::makeDirectory('perfil');
+       Profile::factory()->count(10)->create();
+       Service::factory(50)->create();
+       
     }
 }
