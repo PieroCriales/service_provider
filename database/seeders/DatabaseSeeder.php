@@ -17,9 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
        Storage::makeDirectory('perfil');
-       User::factory(10)->create();
-       
+       Profile::factory()->count(10)->create();
        Service::factory(50)->create();
-    // Profile::factory()->create();
+       
     }
 }
