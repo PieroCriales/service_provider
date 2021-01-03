@@ -44,4 +44,4 @@ Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'de
 Route::get('/paypal/pay', [App\Http\Controllers\PaymentController::class,'payWithPaypal']);
 /* == Finaliza ruta de Pago en Paypal == */
 
-Route::get('/test',[App\Http\Controllers\PaymentController::class],'start');
+Route::get('/test',[App\Http\Controllers\TestController::class,'index']);
