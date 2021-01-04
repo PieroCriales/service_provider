@@ -17,7 +17,7 @@ class Rating extends Model
      */
     public function purchases()
     {
-        return $this->hasMany('App\Models\Purchase');
+        return $this->hasMany('App\Purchase');
     }
 
     /**
@@ -25,6 +25,6 @@ class Rating extends Model
      */
     public function type_rating()
     {
-        return $this->belongsTo('App\Models\TypeRating');
+        return $this->belongsTo('App\TypeRating');
     }
 }

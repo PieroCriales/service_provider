@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
-use App\Models\Purchase;
-use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -84,37 +82,9 @@ class ProfileController extends Controller
             ]);
         }
 
-        $services = Service::where('user_id', $user->id)->get();
-        $n_services_finished = 0;
-        $n_services_pending = 0;
-        foreach ($services as $service) {
-            foreach ($service->purchases as $purchase) {
-                if ($purchase->status) {
-                    $n_services_finished = $n_services_finished + 1;
-                } else {
-                    $n_services_pending = $n_services_pending + 1;
-                }
-            }
-        }
-
-        $purchases_pending = Purchase::where([
-            ['user_id', $user->id],
-            ['status', 0],
-        ])->get();
-
-        $purchases_finished = Purchase::where([
-            ['user_id', $user->id],
-            ['status', 1],
-        ])->get();
-
         return view('profiles.edit',  [
             'user' => $user,
             'profile' => $profile,
-            'services' => $services,
-            'purchases_pending' => $purchases_pending,
-            'purchases_finished' => $purchases_finished,
-            'services_pending' => $n_services_pending,
-            'services_finished' => $n_services_finished
         ]);
     }
 

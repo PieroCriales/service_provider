@@ -78,6 +78,6 @@ class User extends Authenticatable
      */
     public function purchases()
     {
-        return $this->hasMany('App\Models\Purchase');
+        return $this->hasMany('App\Purchase');
     }
 }

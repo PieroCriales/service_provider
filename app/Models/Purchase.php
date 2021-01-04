@@ -24,7 +24,7 @@ class Purchase extends Model
      */
     public function service()
     {
-        return $this->belongsTo('App\Models\Service');
+        return $this->belongsTo('App\Service');
     }
 
     /**
@@ -32,7 +32,7 @@ class Purchase extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\User');
     }
 
     /**
@@ -40,6 +40,6 @@ class Purchase extends Model
      */
     public function rating()
     {
-        return $this->belongsTo('App\Models\Rating');
+        return $this->belongsTo('App\Rating');
     }
 }
