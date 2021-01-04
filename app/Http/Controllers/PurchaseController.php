@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Purchase;
+use App\Models\Rating;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -35,7 +37,38 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bd_purchase = Purchase::where([
+            ['service_id', $request->service_id],
+            ['user_id', $request->user_id],
+            ['status', False]
+        ])->first();
+
+        //  Validacion para no repetir peticiones
+        if (!is_null($bd_purchase)) {
+            return back();
+        }
+
+        $rating = Rating::create([
+            'type_rating_id' => 3
+        ]);
+        $rating->save();
+
+        $datetime = date("c", strtotime($request->due_date));
+        $due_date = Carbon::createFromFormat('Y-m-d\TH:i:sP', $datetime, 'America/Lima');
+        $due_date->addHours(5);
+        $purchase = Purchase::create([
+            'service_id' => $request->service_id,
+            'user_id' => $request->user_id,
+            'rating_id' => $rating->id,
+            'code' => 'pch' . (string)$request->service_id . '-' . (string)$request->user_id,
+            'due_date' => $due_date,
+            'seller_confirmation' => False,
+            'customer_confirmation' => False,
+            'status' => False,
+        ]);
+        $purchase->save();
+
+        return back();
     }
 
     /**

@@ -19,12 +19,9 @@
 
 
                 <div class="col-12 col-sm-6">
-
-
                     <h1 class="my-3">{{$service->title}}</h1>
                     <h3> Descripcion del servicio </h3>
                     <p> {{$service->description}}</p>
-
                     <h3 class="my-3">Ofertante</h3>
 
                     <div class = "col-md-7">
@@ -58,8 +55,39 @@
                     <div class="mt-4">
                         <div class="btn btn-primary btn-lg btn-flat">
                             <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                            Adquirir Servicio
+                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalCenter">Adquirir Servicio</button>
                         </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Petición de servicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form class="form-horizontal" action="{{ route('purchase.store') }}" method="post">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <input type="hidden" name="service_id" id="" value="{{ $service->id }}">
+                                        <input type="hidden" name="user_id" id="" value="{{ \Auth::user()->id }}">
+                                        <label>Fecha y hora de atención deseada</label>
+                                        <input type="datetime-local" name="due_date" max="3000-12-31"
+                                                min="1000-01-01" class="form-control">
+                                    </div>
+                                    <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                    <button class="btn btn-primary" type="submit">Adquirir Servicio</button>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Fin modal -->
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -68,7 +96,7 @@
                             <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" role="tab" aria-controls="product-desc" aria-selected="true" href="#">Comentarios</a>
                         </div>
                     </nav>
-                    <div class="tab-content p-3" id="nav-tabContent">
+                    <div class="col-md-12 p-3" id="nav-tabContent">
                         <div class="card">
                             <div class="card-body">
                                 <form class="form-horizontal" action="{{ route('post.store') }}" method="post">
@@ -84,6 +112,8 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="tab-pane fade show active" role="tabpanel">
                             @include('posts.index')
                         </div>
