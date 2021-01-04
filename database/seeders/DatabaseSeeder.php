@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       Storage::makeDirectory('perfil');
-       Profile::factory()->count(10)->create();
-       Service::factory(50)->create();
-       
+        Storage::makeDirectory('perfil');
+        Profile::factory()->count(10)->create();
+        Service::factory(50)->create();
+        $this->call(TypeRatingSeeder::class);
     }
 }

@@ -39,3 +39,7 @@ Route::get('profile/{profile}', [App\Http\Controllers\ProfileController::class, 
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */
+
+/* Inicio ruta para manejar purchases */
+Route::post('purchase/store', [App\Http\Controllers\PurchaseController::class, 'store'])->name('purchase.store')->middleware('auth');
+/* == Finaliza rutas para manejar purchases == */
