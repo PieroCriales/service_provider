@@ -171,7 +171,7 @@
                                   <div class="col-12">
                                     <div class="card">
                                       <div class="card-header">
-                                        <h3 class="card-title">Servicios por antender</h3>
+                                        <h3 class="card-title">Servicios atendidos</h3>
 
                                         <div class="card-tools">
                                           <div class="input-group input-group-sm" style="width: 150px;">
@@ -200,8 +200,16 @@
                                                 @if($purchase->status)
                                                   <tr>
                                                     <td>{{ $purchase->code }}</td>
-                                                    <td>{{ $service->title }}</td>
-                                                    <td>{{ $purchase->profile->firstname . " " . $purchase->profile->lastname }}</td>
+                                                    <td>
+                                                        <a href="{{ route('service.show', $service) }}">
+                                                        {{ $service->title }}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('profile.show', $purchase->user->profile) }}">
+                                                        {{ $purchase->user->profile->firstname . " " . $purchase->user->profile->lastname }}
+                                                        </a>
+                                                    </td>
                                                     @if($purchase->customer_confirmation)
                                                     <td>Confirmado</td>
                                                     @else
@@ -346,8 +354,8 @@
                                                     </a>
                                                   </td>
                                                   <td>
-                                                    <a href="{{ route('profile.show', $purchase->service->profile) }}">
-                                                    {{ $purchase->service->profile->firstname . " " . $purchase->service->profile->lastname }}
+                                                    <a href="{{ route('profile.show', $purchase->service->user->profile) }}">
+                                                    {{ $purchase->service->user->profile->firstname . " " . $purchase->service->user->profile->lastname }}
                                                     </a>
                                                   </td>
                                                   @if($purchase->customer_confirmation)
