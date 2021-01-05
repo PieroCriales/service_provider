@@ -36,6 +36,9 @@ Route::post('comment', [App\Http\Controllers\CommentController::class, 'store'])
 
 Route::get('profile/{profile}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 
+/*Inicia rutas para calificacion de servicio */
+Route::post('rating', [App\Http\Controllers\RatingController::class, 'store'])->name('rating.store')->middleware('auth');
+
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */

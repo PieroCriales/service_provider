@@ -35,4 +35,12 @@ class Service extends Model
     {
         return $this->hasMany('App\Models\Post');
     }
+
+    /**
+     * Get the ratings for the service.
+     */
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Rating');
+    }
 }

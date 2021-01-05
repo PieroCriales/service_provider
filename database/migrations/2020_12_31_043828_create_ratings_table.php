@@ -18,7 +18,7 @@ class CreateRatingsTable extends Migration
 
             $table->unsignedBigInteger('service_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('rating_star');
+            $table->integer('rating_star')->nullable();
             $table->text('rating_com');
 
             $table->foreign('service_id')->references('id')->on('services');

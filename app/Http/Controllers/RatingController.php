@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
@@ -35,6 +36,31 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
+        $fields = [
+            'rating_star'=> 'required|int',
+            'rating_com'=> 'required|string|max:500',
+        ];
+        $message = ["required"=>' :attribute es requerido' ];
+
+        $this->validate($request, $fields, $message);
+        
+        $ratings = DB::table('ratings')->get();
+
+        foreach ($ratings as $rating){
+            if ($rating->user_id == $request->user_id && $rating->service_id == $request->service_id){
+                return back()->withErrors(['Usted ya calificó este servicio']);
+            }
+        }
+        $rating = Rating::create([
+            'user_id' => $request->get('user_id'),
+            'service_id' => $request->get('service_id'),
+            'rating_star' =>$request->get('rating_star'),
+            'rating_com' => $request->get('rating_com'),
+        ]);
+
+
+        return back();
+        
         //
     }
 
