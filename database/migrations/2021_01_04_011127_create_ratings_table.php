@@ -16,13 +16,7 @@ class CreateRatingsTable extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('service_id');
-            $table->unsignedBigInteger('user_id');
-            $table->integer('rating_star')->nullable();
-            $table->text('rating_com');
-
-            $table->foreign('service_id')->references('id')->on('services');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->text('comment')->nullable();
 
             $table->timestamps();
         });
@@ -35,10 +29,6 @@ class CreateRatingsTable extends Migration
      */
     public function down()
     {
-        Schema::table('ratings', function (Blueprint $table) {
-            $table->dropForeign('ratings_service_id_foreign');
-            $table->dropForeign('ratings_user_id_foreign');
-        });
         Schema::dropIfExists('ratings');
     }
 }

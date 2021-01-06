@@ -43,7 +43,7 @@ class RatingController extends Controller
         $message = ["required"=>' :attribute es requerido' ];
 
         $this->validate($request, $fields, $message);
-        
+
         $ratings = DB::table('ratings')->get();
 
         foreach ($ratings as $rating){
@@ -60,7 +60,7 @@ class RatingController extends Controller
 
 
         return back();
-        
+
         //
     }
 

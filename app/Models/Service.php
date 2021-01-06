@@ -37,10 +37,10 @@ class Service extends Model
     }
 
     /**
-     * Get the ratings for the service.
+     * Get the purchases for the service
      */
-    public function ratings()
+    public function purchases()
     {
-        return $this->hasMany('App\Models\Rating');
+        return $this->hasMany('App\Models\Purchase');
     }
 }
