@@ -83,12 +83,12 @@
                                         <label>Fecha y hora de atención deseada</label>
                                         <input type="datetime-local" name="due_date" max="3000-12-31"
                                                 min="1000-01-01" class="form-control">
-                                        <input type="hidden" name="amount" value="{{ $service->price }}">
-                                        <button class="btn btn-primary" type="submit" name="paynow"
-                                                value="Pay Now">Pagar ahora</button>
                                     </div>
                                     <i class="fas fa-cart-plus fa-lg mr-2"></i>
                                     <button class="btn btn-primary" type="submit">Adquirir Servicio</button>
+                                    <input type="hidden" name="amount" value="{{ $service->price }}">
+                                    <button class="btn btn-primary" type="submit" name="paynow"
+                                            value="Pay Now">Pagar ahora</button>
                                 </form>
                               </div>
                               <div class="modal-footer">
