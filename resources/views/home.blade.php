@@ -7,6 +7,7 @@
     @if($busqueda ?? '')
         <h5 class="m-0 text-dark">Buscando: "{{$busqueda ?? ''}}"</h5>
     @endif
+    <link rel="icon" type="image/png"  href="service_provider_favicon.png">
 @stop
 
 @section('content')

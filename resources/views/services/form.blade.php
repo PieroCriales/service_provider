@@ -1,3 +1,4 @@
+<link rel="icon" type="image/png"  href="service_provider_favicon.png">
 <div class="form-group">
     <label for="title" class="control-label">{{'Título'}}</label>
     <input

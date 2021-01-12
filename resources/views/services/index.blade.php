@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Servicios')
-
+<link rel="icon" type="image/png"  href="service_provider_favicon.png">
 @section('content_header')
 
     <div class="col-sm-13">

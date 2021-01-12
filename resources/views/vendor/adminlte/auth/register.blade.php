@@ -12,7 +12,7 @@
 @endif
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
-
+<link rel="icon" type="image/png"  href="service_provider_favicon.png">
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
         {{ csrf_field() }}

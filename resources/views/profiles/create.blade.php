@@ -4,6 +4,7 @@
 
 @section('content_header')
     <h1 class="m-0 text-dark">Crear Perfil</h1>
+    <link rel="icon" type="image/png"  href="service_provider_favicon.png">
 @stop
 
 @section('content')

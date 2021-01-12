@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Service Provider</title>
+<<<<<<< Updated upstream
 
+=======
+        <link rel="icon" type="image/png"  href="service_provider_favicon.png">
+>>>>>>> Stashed changes
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Link de Bootstrap-->
@@ -26,8 +30,23 @@
             *, *::before, *:after{
                 box-sizing: inherit;
             }
+<<<<<<< Updated upstream
             .fondo{
                 background-color: #1abc9c;/* Color primary */
+=======
+
+            .fondo{
+                
+                background: linear-gradient(150deg,#9ffca2 ,#1abc9c,#ffffff);
+                background-size: 400% 300%;
+                animation: BgGradient 6s ease infinite;
+            }
+
+            @keyframes BgGradient {
+                0% {background-position:0% 50%};
+                50% {background-position:100% 50%};
+                 100% {background-position:0% 50%};
+>>>>>>> Stashed changes
             }
             .navegacion{
                 background-color: #343a40; /* Color dark */
@@ -87,7 +106,13 @@
                 --animate-delay: 5s;
             }
             .logo_service_provider {
+<<<<<<< Updated upstream
                 width: 25rem;
+=======
+                width: 20rem;
+                height: 20rem;
+                
+>>>>>>> Stashed changes
             }
         </style>
 
