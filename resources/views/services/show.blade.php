@@ -57,6 +57,7 @@
                         </h2>
                     </div>
                     <div class="mt-4">
+                        @if($service->user_id != \Auth::user()->id)
                         <div class="btn btn-primary btn-lg btn-flat">
                             <i class="fas fa-cart-plus fa-lg mr-2"></i>
                             <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalCenter">Adquirir Servicio</button>
@@ -92,6 +93,7 @@
                           </div>
                         </div>
                         <!-- Fin modal -->
+                        @endif
                     </div>
                 </div>
 
@@ -126,12 +128,13 @@
                                 @include('posts.index')
                             </div>
                         </div>
-                        
+
                         <!--rating tab -->
                         <div id="rating" class="tab-pane fade">
                             @if ($rating)
                                 @if ($rating_available)
                                 <div class="card">
+                                    @if($service->user_id != \Auth::user()->id)
                                     <div class="card-body">
                                         <div class="container">
                                             <form class="form-horizontal" action="{{ route('rating.update', $rating->id) }}" method="post">
@@ -144,19 +147,21 @@
                                                     <div class="input-group-append">
                                                         <button class="btn btn-primary" id=button type="submit">Enviar</button>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </form>
-                                            
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                                 @endif
                             @else
-                            <div class="alert alert-danger">
-                                <ul>
-                                    <li>Para calificar, debe contratar y/o finalizar el servicio</li>
-                                </ul>
-                            </div>
+                                @if($service->user_id != \Auth::user()->id)
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            <li>Para calificar, debe contratar y/o finalizar el servicio</li>
+                                        </ul>
+                                    </div>
+                                @endif
                             @endif
                             <div class="tab-pane fade show active" role="tabpanel">
                                 @include('ratings.index')

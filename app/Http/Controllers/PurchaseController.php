@@ -60,7 +60,7 @@ class PurchaseController extends Controller
             'service_id' => $request->service_id,
             'user_id' => $request->user_id,
             'rating_id' => $rating->id,
-            'code' => 'pch' . (string)$request->service_id . '-' . (string)$request->user_id,
+            'code' => 'pch' . (string)$request->service_id . '-' . (string)$request->user_id . '-' . (string)$rating->id,
             'due_date' => $due_date,
             'seller_confirmation' => False,
             'customer_confirmation' => False,
@@ -79,7 +79,7 @@ class PurchaseController extends Controller
      */
     public function show(Purchase $purchase)
     {
-        //
+        return view('purchases.show', compact('purchase'));
     }
 
     /**
@@ -100,9 +100,18 @@ class PurchaseController extends Controller
      * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Purchase $purchase)
+    public function update(Purchase $purchase)
     {
-        //
+        if ($purchase->user_id == \Auth::user()->id) {
+            $purchase->customer_confirmation = True;
+        } else {
+            $purchase->seller_confirmation = True;
+        }
+        if ($purchase->customer_confirmation && $purchase->seller_confirmation) {
+            $purchase->status = True;
+        }
+        $purchase->save();
+        return redirect('profile/edit');
     }
 
     /**

@@ -46,4 +46,6 @@ Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'de
 
 /* Inicio ruta para manejar purchases */
 Route::post('purchase/store', [App\Http\Controllers\PurchaseController::class, 'store'])->name('purchase.store')->middleware('auth');
+Route::get('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'show'])->name('purchase.show')->middleware('auth');
+Route::put('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'update'])->name('purchase.update')->middleware('auth');
 /* == Finaliza rutas para manejar purchases == */
