@@ -45,3 +45,13 @@ Route::get('/paypal/pay', [App\Http\Controllers\PaymentController::class,'payWit
 /* == Finaliza ruta de Pago en Paypal == */
 
 Route::get('/test',[App\Http\Controllers\TestController::class,'index']);
+
+/* Inicio ruta para manejar purchases */
+Route::post('purchase/store', [App\Http\Controllers\PurchaseController::class, 'store'])->name('purchase.store')->middleware('auth');
+/* == Finaliza rutas para manejar purchases == */
+
+// route for processing payment
+Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithpaypal'])->name('paypal');
+
+// route for check status of the payment
+Route::get('/status', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status');

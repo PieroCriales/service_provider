@@ -35,4 +35,12 @@ class Service extends Model
     {
         return $this->hasMany('App\Models\Post');
     }
+
+    /**
+     * Get the purchases for the service
+     */
+    public function purchases()
+    {
+        return $this->hasMany('App\Models\Purchase');
+    }
 }
