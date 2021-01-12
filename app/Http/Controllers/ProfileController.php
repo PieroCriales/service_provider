@@ -64,7 +64,29 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        return view('profiles.show', compact('profile'));
+        $user = \Auth::user();
+
+        $services = Service::where('user_id', $user->id)->get();
+        $n_services_finished = 0;
+        $n_services_pending = 0;
+        foreach ($services as $service) {
+            foreach ($service->purchases as $purchase) {
+                if ($purchase->status) {
+                    $n_services_finished = $n_services_finished + 1;
+                } else {
+                    $n_services_pending = $n_services_pending + 1;
+                }
+            }
+        }
+
+        return view('profiles.show',  [
+            'user' => $user,
+            'profile' => $profile,
+            'services' => $services,
+            'services_pending' => $n_services_pending,
+            'services_finished' => $n_services_finished
+        ]);
+
     }
 
     /**
