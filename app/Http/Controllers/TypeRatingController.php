@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rating;
-use App\Models\Purchase;
+use App\Models\TypeRating;
 use Illuminate\Http\Request;
 
-class RatingController extends Controller
+class TypeRatingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,32 +35,16 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        $fields = [
-            'comment'=> 'required|string|max:500',
-            'type_rating_id' => 'required',
-        ];
-
-        $message = ["required"=>' :attribute es requerido' ];
-
-        $this->validate($request, $fields, $message);
-        $rating = Rating::create([
-            'comment' => $request->comment,
-            'type_rating_id' => $request->rating_star,
-        ]);
-        $rating->save();
-
-
-        return back();
         //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Rating  $rating
+     * @param  \App\Models\TypeRating  $typeRating
      * @return \Illuminate\Http\Response
      */
-    public function show(Rating $rating)
+    public function show(TypeRating $typeRating)
     {
         //
     }
@@ -69,10 +52,10 @@ class RatingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Rating  $rating
+     * @param  \App\Models\TypeRating  $typeRating
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rating $rating)
+    public function edit(TypeRating $typeRating)
     {
         //
     }
@@ -81,28 +64,21 @@ class RatingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rating  $rating
+     * @param  \App\Models\TypeRating  $typeRating
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rating $rating)
+    public function update(Request $request, TypeRating $typeRating)
     {
-        
-        $rating->comment = $request->input('comment', '');
-        $rating->type_rating_id = $request->input('rating_star', '');
-        $rating->save();
-
-        return back();
-        
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Rating  $rating
+     * @param  \App\Models\TypeRating  $typeRating
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rating $rating)
+    public function destroy(TypeRating $typeRating)
     {
         //
     }

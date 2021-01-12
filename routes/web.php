@@ -37,8 +37,13 @@ Route::post('comment', [App\Http\Controllers\CommentController::class, 'store'])
 Route::get('profile/{profile}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 
 /*Inicia rutas para calificacion de servicio */
-Route::post('rating', [App\Http\Controllers\RatingController::class, 'store'])->name('rating.store')->middleware('auth');
+Route::put('rating/{rating}', [App\Http\Controllers\RatingController::class, 'update'])->name('rating.update')->middleware('auth');
+Route::get('service/{prom}', [App\Http\Controllers\RatingController::class, 'average'])->name('toServiceController');
 
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */
+
+/* Inicio ruta para manejar purchases */
+Route::post('purchase/store', [App\Http\Controllers\PurchaseController::class, 'store'])->name('purchase.store')->middleware('auth');
+/* == Finaliza rutas para manejar purchases == */
