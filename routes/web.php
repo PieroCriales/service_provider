@@ -34,10 +34,23 @@ Route::post('comment', [App\Http\Controllers\CommentController::class, 'store'])
 
 Route::get('profile/{profile}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 
+/*Inicia rutas para calificacion de servicio */
+Route::put('rating/{rating}', [App\Http\Controllers\RatingController::class, 'update'])->name('rating.update')->middleware('auth');
+Route::get('service/{prom}', [App\Http\Controllers\RatingController::class, 'average'])->name('toServiceController');
+
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */
 
+
 /* Inicio ruta para manejar purchases */
 Route::post('purchase/store', [App\Http\Controllers\PurchaseController::class, 'store'])->name('purchase.store')->middleware('auth');
+Route::get('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'show'])->name('purchase.show')->middleware('auth');
+Route::put('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'update'])->name('purchase.update')->middleware('auth');
 /* == Finaliza rutas para manejar purchases == */
+
+/* Inicio ruta de proceso de pago */
+Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithpaypal'])->name('paypal')->middleware('auth');
+
+/* Ruta de estado de pago */
+Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status')->middleware('auth');

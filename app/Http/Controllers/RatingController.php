@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rating;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -69,6 +70,13 @@ class RatingController extends Controller
      */
     public function update(Request $request, Rating $rating)
     {
+        
+        $rating->comment = $request->input('comment', '');
+        $rating->type_rating_id = $request->input('rating_star', '');
+        $rating->save();
+
+        return back();
+        
         //
     }
 
