@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\Purchase;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -74,7 +76,37 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return view("services.show", compact("service"));
+        $rating_available = False;
+        $rating_id = null;
+        $purchases = Purchase::where('service_id', '=', $service->id)->get();
+        foreach ($purchases as $purchase) {
+            if ($purchase->status && !$purchase->rating->comment) {
+                $rating_available = True;
+                $rating_id = $purchase->rating->id;
+
+            }
+        }
+        
+        $rating = Rating::where('id', $rating_id)->first();
+        
+        //Calculo del promedio de ratings
+        $prom = 0;
+        $average_ratings = Purchase::join('ratings', 'rating_id', '=', 'ratings.id')
+                    ->where('service_id', $service->id)
+                    ->where('comment', '!=', 'null')
+                    ->get();
+        
+        foreach ($average_ratings as $average_rating){
+            $prom = $prom + ($average_rating->type_rating_id)/$average_ratings->count();
+        }
+        $prom = round($prom,1,PHP_ROUND_HALF_UP);
+        //
+        return view("services.show", [
+            'service' => $service,
+            'rating_available' => $rating_available,
+            'rating' => $rating,
+            'prom' => $prom
+        ]);
     }
 
     /**

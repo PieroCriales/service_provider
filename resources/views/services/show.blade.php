@@ -3,6 +3,10 @@
 
 @section('content_header')
     <h1 class="m-0 text-dark">Perfil del Servicio</h1>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/5.8.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('vendor/kartik-v-bootstrap-star-rating/css/rating-star.css') }}" media="all" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{ asset('vendor/kartik-v-bootstrap-star-rating/js/rating-star.js') }}" type="text/javascript"></script>
 @stop
 
 @section('content')
@@ -90,35 +94,81 @@
                         <!-- Fin modal -->
                     </div>
                 </div>
+
+                <!-- tabs -->
                 <div class="row mt-4">
                     <nav class="w-100">
                         <div class="nav nav-tabs" id="product-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" role="tab" aria-controls="product-desc" aria-selected="true" href="#">Comentarios</a>
+                            <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" role="tab" aria-controls="product-desc" aria-selected="true" href="#comment">Comentarios</a>
+                            <a class="nav-item nav-link" id="product-desc-tab" data-toggle="tab" role="tab" aria-controls="product-desc" aria-selected="true" href="#rating">Calificaciones</a>
                         </div>
                     </nav>
-                    <div class="col-md-12 p-3" id="nav-tabContent">
-                        <div class="card">
-                            <div class="card-body">
-                                <form class="form-horizontal" action="{{ route('post.store') }}" method="post">
-                                    {{csrf_field()}}
-                                    <div class="input-group input-group-sm mb-0">
-                                        <input class="form-control form-control-sm" type="text" name="body" id="" placeholder="Consultanos aquí...">
-                                        <input type="hidden" name="service_id" id="" value="{{ $service->id }}">
-                                        <input type="hidden" name="user_id" id="" value="{{ \Auth::user()->id }}">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="submit">Enviar</button>
+
+                    <!--post tab -->
+                    <div class="tab-content p-3">
+                        <div id="comment" class="tab-pane fade show active">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="form-horizontal" action="{{ route('post.store') }}" method="post">
+                                        {{csrf_field()}}
+                                        <div class="input-group input-group-sm mb-0">
+                                            <input class="form-control form-control-sm" type="text" name="body" id="" placeholder="Consultanos aquí...">
+                                            <input type="hidden" name="service_id" id="" value="{{ $service->id }}">
+                                            <input type="hidden" name="user_id" id="" value="{{ \Auth::user()->id }}">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit">Enviar</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" role="tabpanel">
+                                @include('posts.index')
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="tab-pane fade show active" role="tabpanel">
-                            @include('posts.index')
+                        
+                        <!--rating tab -->
+                        <div id="rating" class="tab-pane fade">
+                            @if ($rating)
+                                @if ($rating_available)
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="container">
+                                            <form class="form-horizontal" action="{{ route('rating.update', $rating->id) }}" method="post">
+                                                @method('PUT')
+                                                {{csrf_field()}}
+                                                <p><b>Califique el servicio aqui :</b></p>
+                                                <input id="input-1" name="rating_star" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="">
+                                                <div class="input-group input-group-sm mb-0">
+                                                    <input class="form-control form-control-sm" type="text" name="comment" id="" placeholder="Danos tu opinión...">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" id=button type="submit">Enviar</button>
+                                                    </div>
+                                                </div> 
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                            @else
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>Para calificar, debe contratar y/o finalizar el servicio</li>
+                                </ul>
+                            </div>
+                            @endif
+                            <div class="tab-pane fade show active" role="tabpanel">
+                                @include('ratings.index')
+                            </div>
                         </div>
+
                     </div>
+
                 </div>
+
+
+
             </div>
         </div>
 @stop
