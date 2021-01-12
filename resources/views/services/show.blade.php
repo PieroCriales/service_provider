@@ -23,7 +23,6 @@
 
 
                 <div class="col-12 col-sm-6">
-                    <form method="post" action="{!! URL::to('paypal') !!}">
                     <h1 class="my-3">{{$service->title}}</h1>
                     <h3> Descripcion del servicio </h3>
                     <p> {{$service->description}}</p>
@@ -86,10 +85,13 @@
                                     </div>
                                     <i class="fas fa-cart-plus fa-lg mr-2"></i>
                                     <button class="btn btn-primary" type="submit">Adquirir Servicio</button>
-                                    <input type="hidden" name="amount" value="{{ $service->price }}">
-                                    <button class="btn btn-primary" type="submit" name="paynow"
-                                            value="Pay Now">Pagar ahora</button>
                                 </form>
+                              <form method="post" action="{!! URL::to('paypal') !!}">
+                                  {{csrf_field()}}
+                                  <input type="hidden" name="amount" value="{{ $service->price }}">
+                                  <input type="hidden" name="purchase_id" value="{{ $purchase->id ?? null }}">
+                                  <button class="btn btn-primary" type="submit" name="paynow" value="Pay Now">Pagar ahora</button>
+                              </form>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -100,7 +102,6 @@
                         <!-- Fin modal -->
                         @endif
                     </div>
-                    </form>
                 </div>
 
                 <!-- tabs -->

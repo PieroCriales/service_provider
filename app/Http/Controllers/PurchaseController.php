@@ -64,6 +64,7 @@ class PurchaseController extends Controller
             'due_date' => $due_date,
             'seller_confirmation' => False,
             'customer_confirmation' => False,
+            'paymented' => False,
             'status' => False,
         ]);
         $purchase->save();

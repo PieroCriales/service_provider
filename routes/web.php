@@ -52,7 +52,7 @@ Route::put('purchase/{purchase}', [App\Http\Controllers\PurchaseController::clas
 /* == Finaliza rutas para manejar purchases == */
 
 /* Inicio ruta de proceso de pago */
-Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithpaypal'])->name('paypal');
+Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithpaypal'])->name('paypal')->middleware('auth');
 
 /* Ruta de estado de pago */
-Route::get('/status', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status');
+Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status')->middleware('auth');

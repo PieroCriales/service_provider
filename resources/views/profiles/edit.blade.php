@@ -117,7 +117,7 @@
                                               <th>Cliente</th>
                                               <th>Fecha estimada</th>
                                               <th>Confirmacion de cliente</th>
-                                              <th>Satisfacción</th>
+                                              <th>Pago</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -146,7 +146,11 @@
                                                     @else
                                                     <td>Por confirmar</td>
                                                     @endif
-                                                    <td>{{ $purchase->rating->type_rating->tier }}</td>
+                                                    @if($purchase->paymented)
+                                                        <td>Cancelado</td>
+                                                    @else
+                                                        <td>Por cancelar</td>
+                                                    @endif
                                                   </tr>
                                                 @endif
                                               @endforeach
@@ -275,7 +279,7 @@
                                               <th>Servicio requerido</th>
                                               <th>Servidor</th>
                                               <th>Confirmacion de servidor</th>
-                                              <th>Satisfacción</th>
+                                              <th>Pago</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -301,7 +305,11 @@
                                                   @else
                                                   <td>Por confirmar</td>
                                                   @endif
-                                                  <td>{{ $purchase->rating->type_rating->tier }}</td>
+                                                  @if($purchase->paymented)
+                                                  <td>Cancelado</td>
+                                                  @else
+                                                  <td>Por cancelar</td>
+                                                  @endif
                                                 </tr>
                                               @endforeach
                                           </tbody>

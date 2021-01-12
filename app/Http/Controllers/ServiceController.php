@@ -78,24 +78,26 @@ class ServiceController extends Controller
     {
         $rating_available = False;
         $rating_id = null;
+        $purchase = null;
         $purchases = Purchase::where('service_id', '=', $service->id)->get();
-        foreach ($purchases as $purchase) {
-            if ($purchase->status && !$purchase->rating->comment) {
+        foreach ($purchases as $loop_purchase) {
+            if ($loop_purchase->status && !$loop_purchase->rating->comment) {
                 $rating_available = True;
-                $rating_id = $purchase->rating->id;
-
+                $rating_id = $loop_purchase->rating->id;
+            } elseif (!$loop_purchase->status) {
+                $purchase = $loop_purchase;
             }
         }
-        
+
         $rating = Rating::where('id', $rating_id)->first();
-        
+
         //Calculo del promedio de ratings
         $prom = 0;
         $average_ratings = Purchase::join('ratings', 'rating_id', '=', 'ratings.id')
                     ->where('service_id', $service->id)
                     ->where('comment', '!=', 'null')
                     ->get();
-        
+
         foreach ($average_ratings as $average_rating){
             $prom = $prom + ($average_rating->type_rating_id)/$average_ratings->count();
         }
@@ -105,6 +107,7 @@ class ServiceController extends Controller
             'service' => $service,
             'rating_available' => $rating_available,
             'rating' => $rating,
+            'purchase' => $purchase,
             'prom' => $prom
         ]);
     }
