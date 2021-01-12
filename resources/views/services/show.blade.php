@@ -162,7 +162,7 @@
                                 @include('ratings.index')
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>

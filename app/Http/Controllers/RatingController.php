@@ -36,22 +36,6 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        $fields = [
-            'comment'=> 'required|string|max:500',
-            'type_rating_id' => 'required',
-        ];
-
-        $message = ["required"=>' :attribute es requerido' ];
-
-        $this->validate($request, $fields, $message);
-        $rating = Rating::create([
-            'comment' => $request->comment,
-            'type_rating_id' => $request->rating_star,
-        ]);
-        $rating->save();
-
-
-        return back();
         //
     }
 
