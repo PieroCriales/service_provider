@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\PurchaseController;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use PayPal\Api\Amount;
@@ -27,9 +28,9 @@ use Illuminate\Support\Facades\Config;
 class PaymentController extends Controller
 {
     private $_api_context;
-    
+
     function __construct()
-    {   
+    {
         /** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential(
@@ -53,23 +54,25 @@ class PaymentController extends Controller
         $amount->setTotal($request->get('amount'));
         $amount->setCurrency('USD');
 
+        $purchase_id = $request->get('purchase_id');
+
         $transaction = new \PayPal\Api\Transaction();
         $transaction->setAmount($amount);
 
         $redirectUrls = new \PayPal\Api\RedirectUrls();
-        $redirectUrls->setReturnUrl("http://127.0.0.1:8000/status")//Cambiar la direccion dependiendo de su servidor local
-            ->setCancelUrl("http://127.0.0.1:8000/status");
-        
+        $redirectUrls->setReturnUrl(env("SERVER_LOCAL", 'http://127.0.0.1:8000') . "/status/" . $purchase_id)//Cambiar la direccion dependiendo de su servidor local
+            ->setCancelUrl(env("SEVER_LOCAL", "http://127.0.0.1:8000/status"));
+
        $payment = new \PayPal\Api\Payment();
         $payment->setIntent('sale')
         ->setPayer($payer)
         ->setTransactions(array($transaction))
-        ->setRedirectUrls($redirectUrls);  
+        ->setRedirectUrls($redirectUrls);
 
         try {
             $payment->create($this->_api_context);
-  
-        
+
+
             return redirect()->away($payment->getApprovalLink());
         }
         catch (\PayPal\Exception\PayPalConnectionException $ex) {
@@ -78,8 +81,8 @@ class PaymentController extends Controller
             echo $ex->getData();
         }
     }
-    
-    public function getPaymentStatus(Request $request)
+
+    public function getPaymentStatus(Request $request, $purchase_id)
     {
         $paymentId = $request->input('paymentId');
         $payerId = $request->input('PayerID');
@@ -97,17 +100,19 @@ class PaymentController extends Controller
 
         /** Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
-       
+
         if ($result->getState() === 'approved') {
             $status = 'Gracias! El pago a través de PayPal se ha realizado correctamente.';
+            $purchase = Purchase::where('id', $purchase_id)->first();
+            $purchase->paymented = True;
+            $purchase->save();
             return redirect('/home')->with(compact('status'));
-            
         }
 
         $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-        
+
         return redirect('/home')->with(compact('status'));
 
-       
+
     }
 }

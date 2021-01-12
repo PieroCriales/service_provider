@@ -15,15 +15,7 @@ class TypeRatingSeeder extends Seeder
     public function run()
     {
         DB::table('type_ratings')->insert([
-            'tier' => 'Excelente'
-        ]);
-
-        DB::table('type_ratings')->insert([
-            'tier' => 'Bueno'
-        ]);
-
-        DB::table('type_ratings')->insert([
-            'tier' => 'Promedio'
+            'tier' => 'Muy pobre'
         ]);
 
         DB::table('type_ratings')->insert([
@@ -31,7 +23,15 @@ class TypeRatingSeeder extends Seeder
         ]);
 
         DB::table('type_ratings')->insert([
-            'tier' => 'Muy pobre'
+            'tier' => 'Promedio'
+        ]);
+
+        DB::table('type_ratings')->insert([
+            'tier' => 'Bueno'
+        ]);
+
+        DB::table('type_ratings')->insert([
+            'tier' => 'Excelente'
         ]);
     }
 }

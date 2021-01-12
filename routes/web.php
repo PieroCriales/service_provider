@@ -47,10 +47,12 @@ Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'de
 
 /* Inicio ruta para manejar purchases */
 Route::post('purchase/store', [App\Http\Controllers\PurchaseController::class, 'store'])->name('purchase.store')->middleware('auth');
+Route::get('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'show'])->name('purchase.show')->middleware('auth');
+Route::put('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'update'])->name('purchase.update')->middleware('auth');
 /* == Finaliza rutas para manejar purchases == */
 
 /* Inicio ruta de proceso de pago */
-Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithpaypal'])->name('paypal');
+Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithpaypal'])->name('paypal')->middleware('auth');
 
 /* Ruta de estado de pago */
-Route::get('/status', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status');
+Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status')->middleware('auth');

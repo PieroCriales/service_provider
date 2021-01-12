@@ -117,7 +117,7 @@
                                               <th>Cliente</th>
                                               <th>Fecha estimada</th>
                                               <th>Confirmacion de cliente</th>
-                                              <th>Satisfacción</th>
+                                              <th>Pago</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -125,7 +125,11 @@
                                               @foreach ($service->purchases as $purchase)
                                                 @if(!$purchase->status)
                                                   <tr>
-                                                    <td>{{ $purchase->code }}</td>
+                                                    <td>
+                                                        <a href="{{ route('purchase.update', $purchase) }}" class="">
+                                                            {{ $purchase->code }}
+                                                        </a>
+                                                    </td>
                                                     <td>
                                                       <a href="{{ route('service.show', $service) }}">
                                                       {{ $service->title }}
@@ -142,7 +146,11 @@
                                                     @else
                                                     <td>Por confirmar</td>
                                                     @endif
-                                                    <td>{{ $purchase->rating->type_rating->tier }}</td>
+                                                    @if($purchase->paymented)
+                                                        <td>Cancelado</td>
+                                                    @else
+                                                        <td>Por cancelar</td>
+                                                    @endif
                                                   </tr>
                                                 @endif
                                               @endforeach
@@ -267,17 +275,21 @@
                                         <table class="table table-hover text-nowrap">
                                           <thead>
                                             <tr>
-                                              <th>Codigo</th>
+                                              <th>Código</th>
                                               <th>Servicio requerido</th>
                                               <th>Servidor</th>
                                               <th>Confirmacion de servidor</th>
-                                              <th>Satisfacción</th>
+                                              <th>Pago</th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                               @foreach ($purchases_pending as $purchase)
                                                 <tr>
-                                                  <td>{{ $purchase->code }}</td>
+                                                  <td>
+                                                      <a href="{{ route('purchase.show', $purchase) }}" class="">
+                                                          {{ $purchase->code }}
+                                                      </a>
+                                                  </td>
                                                   <td>
                                                     <a href="{{ route('service.show', $purchase->service) }}">
                                                     {{ $purchase->service->title }}
@@ -288,12 +300,16 @@
                                                     {{ $purchase->service->user->profile->firstname . " " . $purchase->service->user->profile->lastname }}
                                                     </a>
                                                   </td>
-                                                  @if($purchase->customer_confirmation)
+                                                  @if($purchase->seller_confirmation)
                                                   <td>Confirmado</td>
                                                   @else
                                                   <td>Por confirmar</td>
                                                   @endif
-                                                  <td>{{ $purchase->rating->type_rating->tier }}</td>
+                                                  @if($purchase->paymented)
+                                                  <td>Cancelado</td>
+                                                  @else
+                                                  <td>Por cancelar</td>
+                                                  @endif
                                                 </tr>
                                               @endforeach
                                           </tbody>
@@ -358,7 +374,7 @@
                                                     {{ $purchase->service->user->profile->firstname . " " . $purchase->service->user->profile->lastname }}
                                                     </a>
                                                   </td>
-                                                  @if($purchase->customer_confirmation)
+                                                  @if($purchase->seller_confirmation)
                                                   <td>Confirmado</td>
                                                   @else
                                                   <td>Por confirmar</td>
