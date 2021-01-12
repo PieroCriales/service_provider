@@ -262,11 +262,11 @@ return [
         ],
         [
             'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-fw fa-lock',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Administrar Servicios',
+                    'url'  => 'service',
                 ],
                 [
                     'text'    => 'level_one',
