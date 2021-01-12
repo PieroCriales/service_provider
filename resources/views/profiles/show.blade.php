@@ -24,46 +24,89 @@
                             <li class="list-group-item">
                                 <b>Seguidores</b> <a class="float-right">543</a>
                             </li>
-                            <li class="list-group-item">
-                                <b>Total servicios</b> <a class="float-right">20</a>
-                            </li>
+                                <li class="list-group-item">
+                                    <b>Total servicios</b> <a class="float-right">
+                                    @foreach($profile->user->services as $service)
+                                        @if($loop->last)
+                                            {{$loop->count}}
+                                        @endif
+                                    @endforeach
+                                    </a>
+                                </li>
                         </ul>
 
                     </div>
-
                 </div>
 
-            </div>
-            <div class = "col-md-9">
-                <div class = "card">
-                    <div class="card-header p-2">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Historial</a></li>
-                        </ul>
+                    <div class="col-12">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Likes</span>
+                                <span class="info-box-number">41,410</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-12">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Sales</span>
+                                <span class="info-box-number">{{$services_finished}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+                    <div class = "col-md-9">
+                        <div class = "card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" data-toggle="tab">Historial</a></li>
+                                </ul>
+                            </div>
                     <div class = "card-body ">
                         <div class="tab-content">
-
-
                             <!-- /.tab-pane -->
-                            <div class="tab-pane active" id="activity">
-                                <div class="post">
-
-                                    <h1> Aqui iran los servicios ofrecidos </h1>
+                                <div class="tab-pane active" id="activity">
+                                    <div class="post">
+                                        <div class="card">
+                                            <!-- /.card-header -->
+                                            <div class="card-body p-0">
+                                                <div class="table-responsive">
+                                                    <table class="table m-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><i class="fas fa-clipboard-check"></i></th>
+                                                                <th>Codigo del servicio</th>
+                                                                <th>Titulo</th>
+                                                                <th>Precio</th>
+                                                                <th>Descripción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($profile->user->services as $service)
+                                                                <tr>
+                                                                    <td>{{$loop->iteration}}</td>
+                                                                    <td>{{$service->id}}</td>
+                                                                    <td>{{$service->title}}</td>
+                                                                    <td>{{$service->price}}</td>
+                                                                    <td>{{$service->description}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>              
+                                    </div>
                                 </div>
-                            </div>
 
-
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="timeline">
-                                <h1> Aqui ira el historial de los servicios ofrecidos </h1>
-                            </div>
 
                         </div>
                     </div>
-                </div>
-            </div>
-
         </div>
     </div>
 @stop
