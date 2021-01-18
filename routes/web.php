@@ -54,3 +54,6 @@ Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithp
 
 /* Ruta de estado de pago */
 Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status')->middleware('auth');
+
+
+Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
