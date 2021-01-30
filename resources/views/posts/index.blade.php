@@ -21,10 +21,17 @@
                                 <i class="fas fa-share mr-1"></i>
                                 Compartir
                             </a>
-                            <a class="link-black text-sm" href="#">
+                            @if ( in_array($post->id, $liked_posts) )
+                            <a class="link-blue text-sm" href="#">
                                 <i class="far fa-thumbs-up mr-1"></i>
                                 Me gusta
                             </a>
+                            @else
+                                <a class="link-black text-sm" href="#">
+                                    <i class="far fa-thumbs-up mr-1"></i>
+                                    Me gusta
+                                </a>
+                            @endif
                             <span class="float-right">
                                 <a class="link-black text-sm" href="#">
                                     <i class="far fa-comments mr-1">
