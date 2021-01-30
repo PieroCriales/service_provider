@@ -10,12 +10,12 @@
                     @if($mensaje["recibido"])
                         <div class="alert alert-warning" style="margin-right: 50px;">
                             <strong>{{$mensaje["usuario"]}}</strong><small class="float-right">{{$mensaje["fecha"]}}</small>
-                            <br><span class="text-muted">{{$mensaje["mensaje"]}}</span>
+                            <br><span class="text-white">{{$mensaje["mensaje"]}}</span>
                         </div>
                     @else
                         <div class="alert alert-success" style="margin-left: 50px;">
                             <strong>{{$mensaje["usuario"]}}</strong><small class="float-right">{{$mensaje["fecha"]}}</small>
-                            <br><span class="text-muted">{{$mensaje["mensaje"]}}</span>
+                            <br><span class="text-white">{{$mensaje["mensaje"]}}</span>
                         </div>
                     @endif
                     
