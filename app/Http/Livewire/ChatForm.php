@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Events\NuevoMensaje;
+use Illuminate\Support\Facades\Auth;
 
 class ChatForm extends Component
 {
@@ -31,7 +32,7 @@ class ChatForm extends Component
 
         // Obtenemos el valor de usuario de la barra de direcciones
         // si no existe, generamos uno con Faker
-        $this->usuario = request()->query('usuario', $this->usuario) ?? $this->faker->name;                         
+        $this->usuario = Auth::user()->name;                       
 
         // Generamos el primer texto de prueba
         $this->mensaje = $this->faker->realtext(20);

@@ -6,10 +6,10 @@
     <div class="form-group">
         <label for="usuario"><strong>Usuario</strong></label>
         <input 
-            type="text" 
+            type="hidden" 
             wire:model="usuario" 
-            class="form-control" 
-            id="usuario">                
+            name="usuario" 
+            id="usuario" value="{{\Auth::user()->name}}">                
         
         <!-- Validación -->
         @error("usuario") 

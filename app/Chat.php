@@ -10,4 +10,6 @@ class Chat extends Model
     protected $fillable = [
         "usuario", "mensaje"
     ];
+
+
 }
