@@ -118,6 +118,7 @@
                                               <th>Fecha estimada</th>
                                               <th>Confirmacion de cliente</th>
                                               <th>Pago</th>
+                                              <th>Chat</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -151,6 +152,9 @@
                                                     @else
                                                         <td>Por cancelar</td>
                                                     @endif
+                                                    <td>
+                                                    <a type="button" href="/purchase/mensajeria/{{$purchase->code}}">Chat</a>
+                                                    </td>
                                                   </tr>
                                                 @endif
                                               @endforeach
