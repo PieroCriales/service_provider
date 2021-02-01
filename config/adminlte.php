@@ -314,6 +314,11 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+        [
+            'text'        => 'Preguntas Frecuentes',
+            'icon'        => 'fas fa-question-circle',
+            'url'         => 'faqs',
+        ],
     ],
 
     /*
