@@ -18,6 +18,7 @@ Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name(
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('home');
 Route::resource('service', '\App\Http\Controllers\ServiceController')->middleware('auth');
 
 /* Inicia rutas para perfil de usuario */

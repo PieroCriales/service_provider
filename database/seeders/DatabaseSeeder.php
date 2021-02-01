@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         Profile::factory()->count(10)->create();
         Service::factory(50)->create();
         $this->call(TypeRatingSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
