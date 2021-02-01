@@ -57,3 +57,8 @@ Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithp
 Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status')->middleware('auth');
 /* Ruta de estado de chat */
 Route::get('/purchase/mensajeria/{code}/', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
+
+Route::get('/users/all', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+Route::get('/users/{user}/menu', [App\Http\Controllers\UserController::class, 'menu'])->name('user.menu');
+Route::delete('/users/{user}/delete', [App\Http\Controllers\UserController::class, 'remove'])->name('user.delete');
+Route::put('/users/{user}/change', [App\Http\Controllers\UserController::class, 'change'])->name('user.change');
