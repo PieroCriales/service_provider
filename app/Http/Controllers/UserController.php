@@ -64,8 +64,8 @@ class UserController extends Controller
      */
     public function change(User $user)
     {
-        if ($user->fullaccess == "no") {
-            $user->fullaccess = "si";
+        if ($user->fullaccess === "no") {
+            $user->fullaccess = "yes";
         } else {
             $user->fullaccess = "no";
         }
