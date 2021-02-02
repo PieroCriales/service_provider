@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,17 +35,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $fields = [
-            'body'=> 'required|string|max:500',
-        ];
-        $message = ["required"=>' :attribute es requerido' ];
-
-        $this->validate($request, $fields, $message);
-
-        $post = Post::create([
+        $like = Like::create([
             'user_id' => $request->get('user_id'),
-            'service_id' => $request->get('service_id'),
-            'body' => $request->get('body')
+            'post_id' => $request->get('post_id'),
         ]);
 
         return back();
@@ -54,10 +46,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Like $like)
     {
         //
     }
@@ -65,10 +57,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Like $like)
     {
         //
     }
@@ -77,10 +69,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Like $like)
     {
         //
     }
@@ -88,11 +80,12 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Like $like)
     {
-        //
+        $like->delete();
+        return back();
     }
 }
