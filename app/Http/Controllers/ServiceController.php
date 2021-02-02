@@ -174,6 +174,8 @@ class ServiceController extends Controller
         if($request->hasFile('picture_path')){
             Storage::delete('public/'.$service->picture_path);
             $dataService['picture_path'] = $request->file('picture_path')->store('uploads','public');
+            $service->update($dataService);
+            return redirect('service')->with('message', 'Informacion modificada con exito');
         }
 
         $service->update($dataService);

@@ -24,7 +24,6 @@ class TypeServiceController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**

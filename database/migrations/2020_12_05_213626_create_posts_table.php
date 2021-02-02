@@ -20,8 +20,8 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->text("body");
 
-            $table->foreign("service_id")->references("id")->on("services");
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("service_id")->references("id")->on("services")->onDelete('Cascade');
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('Cascade');
             $table->timestamps();
         });
     }
