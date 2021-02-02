@@ -17,12 +17,13 @@
             </div>
         @endif
 
-        <table class="table table-light table-hover text-center text-middle">
+        <table class="table table-light table-hover text-center text-middle" id="example">
             <thead class="thead-light">
             <tr>
                 <th><i class="fas fa-clipboard-check"></th>
                 <th>Foto  <i class="fas fa-camera"></i></th>
                 <th>Titulo  <i class="fas fa-book"></i></th>
+                <th>Categoría  <i class="fas fa-book-open"></i></th>
                 <th>Tecnico  <i class="fas fa-user"></i></th>
                 <th>Precio(soles)  <i class="fas fa-hand-holding-usd"></i></th>
                 <th>Descripción  <i class="fas fa-id-card"></i></th>
@@ -38,6 +39,11 @@
                         <img src="{{asset('storage').'/'.$service->picture_path}}" class="img-thumbnail img-fluid" alt="" width="200">
                     </td>
                     <td> <a href="{{route('service.show', $service)}}">{{$service->title}}</a></td>
+                    @foreach($type_services as $type_service)
+                        @if($service->type_service_id == $type_service->id)
+                            <td>{{$type_service->category}}</td>
+                        @endif
+                    @endforeach
                     <td> <a href="{{ route('profile.show', $service->user->profile ) }}">{{$service->user->profile->firstname . " " . $service->user->profile->lastname}}</a></td>
 
                     <td>{{$service->price}}</td>
@@ -46,6 +52,13 @@
             @endforeach
             </tbody>
         </table>
-        {{ $services->links() }}
     </div>
+@stop
+
+@section('js')
+    <script>
+        $(document).ready( function () {
+            $('#example').DataTable();
+        } );
+    </script>
 @stop

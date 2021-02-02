@@ -10,12 +10,17 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'title', 'description', 'price', 'picture'
+        'user_id','type_service_id','title', 'description', 'price', 'picture'
     ];
 
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function type_service()
+    {
+        return $this->belongsTo('App\Models\TypeService');
     }
 
     /**

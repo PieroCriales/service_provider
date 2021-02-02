@@ -6,6 +6,7 @@ use App\Models\Like;
 use App\Models\Service;
 use App\Models\Purchase;
 use App\Models\Rating;
+use App\Models\TypeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,11 +21,24 @@ class ServiceController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('buscar');
-        $services = Service::where('user_id', \Auth::user()->id)->search($search)->paginate(3);
+        $type_services = TypeService::select('id','category')->get();
+        $services = Service::where('user_id', \Auth::user()->id)->get();
         return view('services.index', [
             "services" => $services,
-            "busqueda" => $search
+            "busqueda" => $search,
+            'type_services' => $type_services
         ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getall()
+    {
+        $services = Service::all();
+        return view('services.getall', compact('services'));
     }
 
     /**
@@ -34,7 +48,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        $type_services = TypeService::select('id','category')->get();
+        return view('services.create', [
+            'type_services' => $type_services]);
     }
 
     /**
@@ -52,7 +68,6 @@ class ServiceController extends Controller
             'picture_path'=>'max:10000|mimes:jpeg,png,jpg'
         ];
         $message = ["required"=>' :attribute es requerido' ];
-
         $this->validate($request, $fields, $message);
         // $serviceData=request()->all();
 
@@ -137,7 +152,11 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return view('services.edit', compact('service'));
+
+        $type_services = TypeService::select('id','category')->get();
+        return view('services.edit', [
+            'type_services' => $type_services,
+            'service'=> $service]);
     }
 
     /**
