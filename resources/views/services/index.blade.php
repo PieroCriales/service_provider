@@ -44,7 +44,7 @@
     <br/>
     <br/>
 
-    <table class="table table-bordered table-striped dataTable table-hover text-center" >
+    <table class="table table-bordered table-striped dataTable table-hover text-center" id="example">
 
         <thead class="thead-light">
         <tr>
@@ -89,7 +89,12 @@
         </tbody>
 
     </table>
-    {{$services->links()}}
+@stop
 
-    </div>
+@section('js')
+    <script>
+        $(document).ready( function () {
+            $('#example').DataTable();
+        } );
+    </script>
 @stop

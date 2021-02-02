@@ -14,11 +14,14 @@
         <a href="{{ route('user.index') }}" class="row">
             <button type="button" class="btn btn-block btn-outline-danger">Categoria de servicios</button>
         </a>
-        <a href="{{ route('user.index') }}" class="row">
-            <button type="button" class="btn btn-block btn-outline-success">Reportes de contratos</button>
+        <a href="{{ route('service.getall') }}" class="row">
+            <button type="button" class="btn btn-block btn-outline-success">Registros de servicios</button>
         </a>
-        <a href="{{ route('user.index') }}" class="row">
-            <button type="button" class="btn btn-block btn-outline-success">Reportes por usuarios</button>
+        <a href="{{ route('purchase.index') }}" class="row">
+            <button type="button" class="btn btn-block btn-outline-secondary">Registros de contratos</button>
+        </a>
+        <a href="{{ route('purchase.general') }}" class="row">
+            <button type="button" class="btn btn-block btn-outline-primary">Reportes generales</button>
         </a>
     </div>
 @stop

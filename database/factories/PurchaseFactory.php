@@ -35,10 +35,16 @@ class PurchaseFactory extends Factory
 
         if ($seller_confirmation || $customer_confirmation) {
             $paymented = 1;
+            $status = random_int(0, 1);
         }
 
         if ($seller_confirmation && $customer_confirmation) {
             $status = 1;
+        }
+        $service = Service::all()->random();
+        $user = null;
+        while ($user == null || $user->id == $service->user_id) {
+            $user = User::all()->random();
         }
         return [
             'code' => $this->faker->md5,
@@ -46,8 +52,8 @@ class PurchaseFactory extends Factory
             'seller_confirmation' => $seller_confirmation,
             'customer_confirmation' => $customer_confirmation,
             'status' => $status,
-            'service_id' => Service::all()->random()->id,
-            'user_id' => User::all()->random()->id,
+            'service_id' => $service->id,
+            'user_id' => $user->id,
             'rating_id' => Rating::factory(),
             'paymented' => $paymented
         ];

@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('buscar');
-        $services = Service::search($search)->paginate(3);
+        $services = Service::get();
 
         return view('home', [
             "services" => $services,

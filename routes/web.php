@@ -58,7 +58,11 @@ Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class,
 /* Ruta de estado de chat */
 Route::get('/purchase/mensajeria/{code}/', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
 
+/* Rutas solo admin */
 Route::get('/users/all', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
 Route::get('/users/{user}/menu', [App\Http\Controllers\UserController::class, 'menu'])->name('user.menu');
 Route::delete('/users/{user}/delete', [App\Http\Controllers\UserController::class, 'remove'])->name('user.delete');
 Route::put('/users/{user}/change', [App\Http\Controllers\UserController::class, 'change'])->name('user.change');
+Route::get('/purchases/all', [App\Http\Controllers\PurchaseController::class, 'index'])->name('purchase.index')->middleware('auth')->middleware('onlyadmin');
+Route::get('/services/getall', [App\Http\Controllers\ServiceController::class, 'getall'])->name('service.getall')->middleware('auth')->middleware('onlyadmin');
+Route::get('/purchases/general', [App\Http\Controllers\PurchaseController::class, 'general'])->name('purchase.general')->middleware('auth')->middleware('onlyadmin');

@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Servicios')
+@section('title', 'Usuarios')
 
 @section('content_header')
 <div class="col-sm-13">
 
-    <table class="table table-bordered table-striped dataTable table-hover text-center" >
+    <table class="table table-bordered table-striped dataTable table-hover text-center" id="example">
 
         <thead class="thead-light">
         <tr>
@@ -40,4 +40,12 @@
         @endforeach
         </tbody>
     </table>
+@stop
+
+    @section('js')
+        <script>
+            $(document).ready( function () {
+                $('#example').DataTable();
+            } );
+        </script>
 @stop

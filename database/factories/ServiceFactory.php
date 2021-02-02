@@ -24,11 +24,11 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            'title' =>$this->faker->sentence(1),
+            'title' =>$this->faker->catchPhrase,
             'description' =>$this->faker->paragraph(),
-            'price' =>$this->faker->numberBetween(150,200),
+            'price' =>$this->faker->numberBetween(1500,7000),
             'user_id'=>User::all()->random()->id,
-            'picture_path'=>'perfil/'. $this->faker->image('public/storage/perfil',640,480,null,false) 
+            'picture_path'=>'perfil/'. $this->faker->image('public/storage/perfil',640,480,null,false)
         ];
     }
 }
