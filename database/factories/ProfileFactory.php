@@ -23,11 +23,11 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            'firstname' =>$this->faker->sentence(1),
-            'lastname' =>$this->faker->sentence(1),
+            'firstname' =>$this->faker->firstName(),
+            'lastname' =>$this->faker->lastName,
             'address' =>$this->faker->address,
-            'phone_number' =>$this->faker->phoneNumber(),
-            'profession' =>$this->faker->sentence(1),
+            'phone_number' =>$this->faker->phoneNumber,
+            'profession' =>$this->faker->jobTitle,
             'user_id'=>User::factory()
         ];
     }

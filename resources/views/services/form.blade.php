@@ -9,6 +9,15 @@
         {!! $errors->first('title','<div class="alert alert-danger alert-dismissible">:message</div>')!!}
 </div>
 
+<!-- Categoría --> 
+<div class="form-group">
+  <label for="type_service_id">Seleccionar categoría: </label>
+  <select class="form-control" name="type_service_id" id="type_service_id">
+    @foreach($type_services as $type_service)
+    <option value="{{$type_service->id}}">{{$type_service->category}}</option>
+    @endforeach
+  </select>
+</div>
 
 <!-- Description -->
 <div class="form-group">

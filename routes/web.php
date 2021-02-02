@@ -18,6 +18,7 @@ Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name(
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('home');
 Route::resource('service', '\App\Http\Controllers\ServiceController')->middleware('auth');
 
 /* Inicia rutas para perfil de usuario */
@@ -45,6 +46,7 @@ Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'de
 
 /* Inicio ruta para manejar purchases */
 Route::post('purchase/store', [App\Http\Controllers\PurchaseController::class, 'store'])->name('purchase.store')->middleware('auth');
+Route::get('purchase/{purchase}/edit', [App\Http\Controllers\PurchaseController::class, 'edit'])->name('purchase.edit')->middleware('auth');
 Route::get('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'show'])->name('purchase.show')->middleware('auth');
 Route::put('purchase/{purchase}', [App\Http\Controllers\PurchaseController::class, 'update'])->name('purchase.update')->middleware('auth');
 /* == Finaliza rutas para manejar purchases == */
@@ -57,3 +59,14 @@ Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class,
 
 /* Ruta para preguntas frecuentes */
 Route::get('/faqs', [App\Http\Controllers\FaqsController::class,'show'])->name('faqs.show')->middleware('auth');
+/* Ruta de estado de chat */
+Route::get('/purchase/mensajeria/{code}/', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
+
+/* Rutas solo admin */
+Route::get('/users/all', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+Route::get('/users/{user}/menu', [App\Http\Controllers\UserController::class, 'menu'])->name('user.menu');
+Route::delete('/users/{user}/delete', [App\Http\Controllers\UserController::class, 'remove'])->name('user.delete');
+Route::put('/users/{user}/change', [App\Http\Controllers\UserController::class, 'change'])->name('user.change');
+Route::get('/purchases/all', [App\Http\Controllers\PurchaseController::class, 'index'])->name('purchase.index')->middleware('auth')->middleware('onlyadmin');
+Route::get('/services/getall', [App\Http\Controllers\ServiceController::class, 'getall'])->name('service.getall')->middleware('auth')->middleware('onlyadmin');
+Route::get('/purchases/general', [App\Http\Controllers\PurchaseController::class, 'general'])->name('purchase.general')->middleware('auth')->middleware('onlyadmin');

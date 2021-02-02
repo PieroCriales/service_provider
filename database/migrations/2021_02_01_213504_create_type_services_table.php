@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchasesTable extends Migration
+class CreateTypeServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,9 @@ class CreatePurchasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('type_services', function (Blueprint $table) {
             $table->id();
-
-            $table->string('code', 50);
-            $table->dateTimeTz('due_date');
-
-            $table->boolean('seller_confirmation');
-            $table->boolean('customer_confirmation');
-            $table->boolean('status');
-
+            $table->string('category',40);
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ class CreatePurchasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('type_services');
     }
 }

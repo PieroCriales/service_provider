@@ -118,6 +118,7 @@
                                               <th>Fecha estimada</th>
                                               <th>Confirmacion de cliente</th>
                                               <th>Pago</th>
+                                              <th>Chat</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -140,7 +141,11 @@
                                                       {{ $purchase->user->profile->firstname . " " . $purchase->user->profile->lastname }}
                                                       </a>
                                                     </td>
-                                                    <td>{{ $purchase->due_date }}</td>
+                                                    <td>
+                                                    <a href="/purchase/{{$purchase->id}}/edit" class="">
+                                                      {{ $purchase->due_date }} 
+                                                    </a>
+                                                    </td>
                                                     @if($purchase->customer_confirmation)
                                                     <td>Confirmado</td>
                                                     @else
@@ -151,6 +156,9 @@
                                                     @else
                                                         <td>Por cancelar</td>
                                                     @endif
+                                                    <td>
+                                                    <a type="button" href="/purchase/mensajeria/{{$purchase->code}}">Chat</a>
+                                                    </td>
                                                   </tr>
                                                 @endif
                                               @endforeach
