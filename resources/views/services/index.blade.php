@@ -51,6 +51,7 @@
             <th><i class="fas fa-clipboard-check"></i></th>
             <th>Foto  <i class="fas fa-camera"></i></th>
             <th>Titulo  <i class="fas fa-tools"></i></th>
+            <th>Categoría  <i class="fas fa-book-open"></i></th>
             <th>Precio(soles)  <i class="fas fa-hand-holding-usd"></i></th>
             <th>Descripción  <i class="fas fa-id-card"></i></th>
             <th>Acciones  <i class="fas fa-mouse"></i></th>
@@ -70,6 +71,11 @@
 
                 </td>
                 <td>{{$service->title}}</td>
+                @foreach($type_services as $type_service)
+                    @if($service->type_service_id == $type_service->id)
+                        <td>{{$type_service->category}}</td>
+                    @endif
+                @endforeach
                 <td>{{$service->price}}</td>
                 <td>{{$service->description}}</td>
                 <td>

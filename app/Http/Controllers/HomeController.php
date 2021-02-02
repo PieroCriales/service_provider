@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\TypeService;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -26,11 +26,13 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('buscar');
+        $type_services = TypeService::select('id','category')->get();
         $services = Service::search($search)->paginate(3);
 
         return view('home', [
             "services" => $services,
-            "busqueda" => $search
+            "busqueda" => $search,
+            'type_services' => $type_services
         ]);
     }
 }
