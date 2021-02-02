@@ -16,7 +16,6 @@
                 {{Session::get('message')}}
             </div>
         @endif
-
         <form class="form-horizontal" action="{{ route('faqs.show') }}" method="get">
             <div class="input-group input-group-sm mb-0">
                 <div class="input-group-append">
@@ -24,6 +23,7 @@
                 </div>
             </div>
          </form>
+
 
         <table class="table table-light table-hover text-center text-middle">
             <thead class="thead-light">
