@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger("service_id");
             $table->unsignedBigInteger("user_id");
             $table->text("body");
+            $table->integer("num_likes");
 
             $table->foreign("service_id")->references("id")->on("services");
             $table->foreign("user_id")->references("id")->on("users");

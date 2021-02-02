@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Like;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -39,7 +41,9 @@ class LikeController extends Controller
             'user_id' => $request->get('user_id'),
             'post_id' => $request->get('post_id'),
         ]);
-
+        Post::where([
+                    ['id', $request->get('post_id')]
+        ])->increment('num_likes');
         return back();
     }
 
@@ -85,6 +89,7 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
+        Post::where('id', $like->get('post_id'))->update(['num_likes' => DB::raw('num_likes - 1')]);
         $like->delete();
         return back();
     }

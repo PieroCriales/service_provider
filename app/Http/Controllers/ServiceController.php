@@ -6,6 +6,7 @@ use App\Models\Like;
 use App\Models\Service;
 use App\Models\Purchase;
 use App\Models\Rating;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -118,6 +119,9 @@ class ServiceController extends Controller
                 array_push($liked_id, $like->id);
             }
         }
+
+        $total_posts = Post::orderBy('num_likes', 'desc')->get();
+
         return view("services.show", [
             'service' => $service,
             'rating_available' => $rating_available,
@@ -126,6 +130,7 @@ class ServiceController extends Controller
             'prom' => $prom,
             'liked_posts' => $liked_posts,
             'liked_id' => $liked_id,
+            'total_posts' => $total_posts
         ]);
     }
 

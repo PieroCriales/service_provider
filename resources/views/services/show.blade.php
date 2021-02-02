@@ -134,6 +134,7 @@
                                             <input class="form-control form-control-sm" type="text" name="body" id="" placeholder="Consultanos aquí...">
                                             <input type="hidden" name="service_id" id="" value="{{ $service->id }}">
                                             <input type="hidden" name="user_id" id="" value="{{ \Auth::user()->id }}">
+                                            <input type="hidden" name="num_likes" id="" value="0">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="submit">Enviar</button>
                                             </div>

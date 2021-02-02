@@ -37,6 +37,7 @@ class PostController extends Controller
     {
         $fields = [
             'body'=> 'required|string|max:500',
+            'num_likes' => 'required|int',
         ];
         $message = ["required"=>' :attribute es requerido' ];
 
@@ -45,7 +46,8 @@ class PostController extends Controller
         $post = Post::create([
             'user_id' => $request->get('user_id'),
             'service_id' => $request->get('service_id'),
-            'body' => $request->get('body')
+            'body' => $request->get('body'),
+            'num_likes' => $request->get('num_likes'),
         ]);
 
         return back();

@@ -1,4 +1,4 @@
-@foreach ($service->posts->reverse() as $post)
+@foreach ($total_posts as $post)
     <div class="card">
         <div class="card-body">
             <div class="tab-content">
