@@ -146,7 +146,7 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        //
+        return view('purchases.edit', compact('purchase'));
     }
 
     /**
@@ -156,8 +156,9 @@ class PurchaseController extends Controller
      * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function update(Purchase $purchase)
+    public function update(Request $request,Purchase $purchase)
     {
+        $purchase->due_date = $request->get('due_date');
         if ($purchase->user_id == \Auth::user()->id) {
             $purchase->customer_confirmation = True;
         } else {

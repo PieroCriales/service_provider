@@ -141,7 +141,11 @@
                                                       {{ $purchase->user->profile->firstname . " " . $purchase->user->profile->lastname }}
                                                       </a>
                                                     </td>
-                                                    <td>{{ $purchase->due_date }}</td>
+                                                    <td>
+                                                    <a href="/purchase/{{$purchase->id}}/edit" class="">
+                                                      {{ $purchase->due_date }} 
+                                                    </a>
+                                                    </td>
                                                     @if($purchase->customer_confirmation)
                                                     <td>Confirmado</td>
                                                     @else
