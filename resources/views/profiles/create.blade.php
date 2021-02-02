@@ -1,10 +1,4 @@
-@extends('adminlte::page')
-
-@section('title', 'Crear perfil')
-
-@section('content_header')
-    <h1 class="m-0 text-dark">Crear Perfil</h1>
-@stop
+@extends('layouts.app')
 
 @section('content')
     <div class="row justify-content-center">
@@ -131,9 +125,6 @@
                         <div class="row justify-content-around">
                             <button type="submit" class="btn btn-primary">
                                 Registrar
-                            </button>
-                            <button type="submit" class="btn btn-outline-primary">
-                                Más tarde
                             </button>
                         </div>
                     </form>
