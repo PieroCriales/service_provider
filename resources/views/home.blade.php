@@ -17,7 +17,7 @@
             </div>
         @endif
 
-        <table class="table table-light table-hover text-center text-middle">
+        <table class="table table-light table-hover text-center text-middle" id="example">
             <thead class="thead-light">
             <tr>
                 <th><i class="fas fa-clipboard-check"></th>
@@ -52,6 +52,13 @@
             @endforeach
             </tbody>
         </table>
-        {{ $services->links() }}
     </div>
+@stop
+
+@section('js')
+    <script>
+        $(document).ready( function () {
+            $('#example').DataTable();
+        } );
+    </script>
 @stop

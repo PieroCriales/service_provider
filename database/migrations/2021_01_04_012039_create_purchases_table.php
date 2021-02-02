@@ -16,7 +16,7 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code', 20);
+            $table->string('code', 50);
             $table->dateTimeTz('due_date');
 
             $table->boolean('seller_confirmation');

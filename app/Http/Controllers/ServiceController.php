@@ -21,12 +21,23 @@ class ServiceController extends Controller
     {
         $search = $request->get('buscar');
         $type_services = TypeService::select('id','category')->get();
-        $services = Service::where('user_id', \Auth::user()->id)->search($search)->paginate(3);
+        $services = Service::where('user_id', \Auth::user()->id)->get();
         return view('services.index', [
             "services" => $services,
             "busqueda" => $search,
             'type_services' => $type_services
         ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getall()
+    {
+        $services = Service::all();
+        return view('services.getall', compact('services'));
     }
 
     /**

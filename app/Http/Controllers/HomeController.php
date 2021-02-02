@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $search = $request->get('buscar');
         $type_services = TypeService::select('id','category')->get();
-        $services = Service::search($search)->paginate(3);
+        $services = Service::get();
 
         return view('home', [
             "services" => $services,
