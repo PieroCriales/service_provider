@@ -35,7 +35,12 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $like = Like::create([
+            'user_id' => $request->get('user_id'),
+            'post_id' => $request->get('post_id'),
+        ]);
+
+        return back();
     }
 
     /**
@@ -80,6 +85,7 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
-        //
+        $like->delete();
+        return back();
     }
 }

@@ -103,8 +103,11 @@ class ServiceController extends Controller
             $prom = $prom + ($average_rating->type_rating_id)/$average_ratings->count();
         }
         $prom = round($prom,1,PHP_ROUND_HALF_UP);
-
+        //!-- Fin calculo
+        $liked_id = array();
         $liked_posts = array();
+        $like = null;
+        
         foreach ($service->posts as $post) {
             $like = Like::where([
                 ['user_id', \Auth::user()->id],
@@ -112,16 +115,17 @@ class ServiceController extends Controller
             ])->first();
             if ($like) {
                 array_push($liked_posts, $post->id);
+                array_push($liked_id, $like->id);
             }
         }
-        //
         return view("services.show", [
             'service' => $service,
             'rating_available' => $rating_available,
             'rating' => $rating,
             'purchase' => $purchase,
             'prom' => $prom,
-            'liked_posts' => $liked_posts
+            'liked_posts' => $liked_posts,
+            'liked_id' => $liked_id,
         ]);
     }
 

@@ -17,28 +17,43 @@
                             {{ $post->body }}
                         </p>
                         <p>
-                            <a class="link-black text-sm mr-2" href="#">
-                                <i class="fas fa-share mr-1"></i>
-                                Compartir
-                            </a>
-                            @if ( in_array($post->id, $liked_posts) )
-                            <a class="link-blue text-sm" href="#">
-                                <i class="far fa-thumbs-up mr-1"></i>
-                                Me gusta
-                            </a>
-                            @else
-                                <a class="link-black text-sm" href="#">
-                                    <i class="far fa-thumbs-up mr-1"></i>
-                                    Me gusta
-                                </a>
-                            @endif
-                            <span class="float-right">
-                                <a class="link-black text-sm" href="#">
-                                    <i class="far fa-comments mr-1">
+                            <div class = 'btn-group'>
+                                <button class="btn btn-default btn-xs" id=button type="button">
+                                        <i class="fas fa-share mr-1"></i>
+                                        Compartir
+                                </button>
+
+                                @if ( in_array($post->id, $liked_posts))
+                                    @foreach ($post->likes as $like)
+                                        @if (in_array($like->id, $liked_id))
+                                            <form id="link-destroy" method="post" action="{{ route('like.destroy', $like) }}" >
+                                                {{csrf_field()}}
+                                                {{method_field('DELETE')}}
+                                                <button class="btn btn-primary btn-xs" id=button type="submit">
+                                                    <i class="far fa-thumbs-up mr-1"></i>
+                                                    Me gusta ({{$post->likes->count()}})
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <form id="link" action="{{ route('like.store')}}" method="post">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                        <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
+                                        <button class="btn btn-default btn-xs" id=button type="submit">
+                                            <i class="far fa-thumbs-up mr-1"></i>
+                                            Me gusta ({{$post->likes->count()}})
+                                        </button>
+                                    </form>
+                                @endif
+                                <span class="float-right">
+                                    <button class="btn btn-default btn-xs" id=button type="button">
+                                        <i class="far fa-comments mr-1"></i>
                                         Comentarios ({{$post->comments->count()}})
-                                    </i>
-                                </a>
-                            </span>
+                                    </button>
+                                </span>
+                            </div>
                         </p>
                     </div>
                     <!-- / .post -->

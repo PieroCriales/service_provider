@@ -80,4 +80,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Purchase');
     }
+
+    /**
+     * Get the likes given by the user
+     */
+
+    public function likes(){
+        return $this->hasMany('App\Models\Like');
+    }
 }
