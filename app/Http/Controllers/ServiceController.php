@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\Service;
 use App\Models\Purchase;
 use App\Models\Rating;
@@ -117,13 +118,29 @@ class ServiceController extends Controller
             $prom = $prom + ($average_rating->type_rating_id)/$average_ratings->count();
         }
         $prom = round($prom,1,PHP_ROUND_HALF_UP);
-        //
+        //!-- Fin calculo
+        $liked_id = array();
+        $liked_posts = array();
+        $like = null;
+        
+        foreach ($service->posts as $post) {
+            $like = Like::where([
+                ['user_id', \Auth::user()->id],
+                ['post_id', $post->id],
+            ])->first();
+            if ($like) {
+                array_push($liked_posts, $post->id);
+                array_push($liked_id, $like->id);
+            }
+        }
         return view("services.show", [
             'service' => $service,
             'rating_available' => $rating_available,
             'rating' => $rating,
             'purchase' => $purchase,
-            'prom' => $prom
+            'prom' => $prom,
+            'liked_posts' => $liked_posts,
+            'liked_id' => $liked_id,
         ]);
     }
 
@@ -174,6 +191,8 @@ class ServiceController extends Controller
         if($request->hasFile('picture_path')){
             Storage::delete('public/'.$service->picture_path);
             $dataService['picture_path'] = $request->file('picture_path')->store('uploads','public');
+            $service->update($dataService);
+            return redirect('service')->with('message', 'Informacion modificada con exito');
         }
 
         $service->update($dataService);

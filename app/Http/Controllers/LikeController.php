@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TypeService;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
-class TypeServiceController extends Controller
+class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,6 +24,7 @@ class TypeServiceController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -34,16 +35,21 @@ class TypeServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $like = Like::create([
+            'user_id' => $request->get('user_id'),
+            'post_id' => $request->get('post_id'),
+        ]);
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TypeService  $typeService
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function show(TypeService $typeService)
+    public function show(Like $like)
     {
         //
     }
@@ -51,10 +57,10 @@ class TypeServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TypeService  $typeService
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function edit(TypeService $typeService)
+    public function edit(Like $like)
     {
         //
     }
@@ -63,10 +69,10 @@ class TypeServiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TypeService  $typeService
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TypeService $typeService)
+    public function update(Request $request, Like $like)
     {
         //
     }
@@ -74,11 +80,12 @@ class TypeServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TypeService  $typeService
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TypeService $typeService)
+    public function destroy(Like $like)
     {
-        //
+        $like->delete();
+        return back();
     }
 }

@@ -57,8 +57,14 @@ Route::post('/paypal', [App\Http\Controllers\PaymentController::class, 'payWithp
 /* Ruta de estado de pago */
 Route::get('/status/{purchase}', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])->name('status')->middleware('auth');
 
+
 /* Ruta para preguntas frecuentes */
 Route::get('/faqs', [App\Http\Controllers\FaqsController::class,'show'])->name('faqs.show')->middleware('auth');
+
+/* Inicia rutas para manejar likes */
+Route::post('like/store', [App\Http\Controllers\LikeController::class, 'store'])->name('like.store')->middleware('auth');
+Route::delete('like/{like}/delete', [App\Http\Controllers\LikeController::class, 'destroy'])->name('like.destroy')->middleware('auth');
+/* == Finaliza ruta para manejar likes == */
 /* Ruta de estado de chat */
 Route::get('/purchase/mensajeria/{code}/', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
 

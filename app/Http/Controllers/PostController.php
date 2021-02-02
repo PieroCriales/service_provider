@@ -41,6 +41,7 @@ class PostController extends Controller
         $message = ["required"=>' :attribute es requerido' ];
 
         $this->validate($request, $fields, $message);
+
         $post = Post::create([
             'user_id' => $request->get('user_id'),
             'service_id' => $request->get('service_id'),
