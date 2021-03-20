@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HistoryBet;
 use App\Models\Room;
-use App\Models\User;
+use App\Models\RoomUser;
 use Illuminate\Http\Request;
 
 class HistoryBetController extends Controller
@@ -37,7 +37,25 @@ class HistoryBetController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $room_users = RoomUser::where("room_id", "=", $request->room_id)->get();
+
+        foreach ($room_users as $room_user) {
+            $room_user->finalized = true;
+            $room_user->save();
+            $history_bet = HistoryBet::create([
+                "room_id" => $room_user->room_id,
+                "user_id" => $room_user->user_id
+            ]);
+            if ($room_user == $request->result) {
+                $history_bet->winner = true;
+            }
+            $history_bet->save();
+        }
+        $room = Room::where("id", "=", $room_user->room_id)->first();
+        $room->nro_gamblers = 0;
+        $room->save();
+
+        return redirect('/home');
     }
 
     /**
