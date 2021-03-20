@@ -1,12 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Inicio')
+@section('title', 'Gambling House')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Home</h1>
-    @if($busqueda ?? '')
-        <h5 class="m-0 text-dark">Buscando: "{{$busqueda ?? ''}}"</h5>
-    @endif
+    <h1 class="m-0 text-dark">Casas de apuestas</h1>
 @stop
 
 @section('content')
@@ -20,31 +17,20 @@
         <table class="table table-light table-hover text-center text-middle">
             <thead class="thead-light">
             <tr>
-                <th><i class="fas fa-clipboard-check"></th>
-                <th>Foto  <i class="fas fa-camera"></i></th>
-                <th>Titulo  <i class="fas fa-book"></i></th>
-                <th>Tecnico  <i class="fas fa-user"></i></th>
-                <th>Precio(soles)  <i class="fas fa-hand-holding-usd"></i></th>
-                <th>Descripción  <i class="fas fa-id-card"></i></th>
+                <th>id</th>
+                <th>Salón de apuestas</th>
             </tr>
-
             </thead>
 
             <tbody>
-            @foreach($services as $service)
+            @foreach($rooms as $room)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>
-                        <img src="{{asset('storage').'/'.$service->picture_path}}" class="img-thumbnail img-fluid" alt="" width="200">
-                    </td>
-                    <td> <a href="{{route('service.show', $service)}}">{{$service->title}}</a></td>
-                    <td> <a href="#">{{$service->user->profile->firstname . " " . $service->user->profile->lastname}}</a></td>
-                    <td>{{$service->price}}</td>
-                    <td>{{$service->description}}</td>
+{{--                    <td> <a href="{{route('service.show', $service)}}">{{$service->title}}</a></td>--}}
+                    <td>{{ $room->name }}</td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        {{ $services->links() }}
     </div>
 @stop

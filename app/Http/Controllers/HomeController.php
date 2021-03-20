@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
-use Illuminate\Http\Request;
+use App\Models\Room;
 
 class HomeController extends Controller
 {
@@ -20,17 +19,11 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param Request $request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->get('buscar');
-        $services = Service::search($search)->paginate(3);
-
-        return view('home', [
-            "services" => $services,
-            "busqueda" => $search
-        ]);
+        $rooms = Room::get();
+        return view('home', compact('rooms'));
     }
 }

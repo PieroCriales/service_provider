@@ -48,20 +48,4 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Profile');
     }
-
-    /**
-     * Get the services record associated with the user
-     */
-    public function services()
-    {
-        return $this->hasMany('App\Models\Service');
-    }
-
-    /**
-     * Get the posts associated with the user
-     */
-    public function posts()
-    {
-        return $this->hasMany('App\Models\Post');
-    }
 }
