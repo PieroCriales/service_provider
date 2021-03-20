@@ -13,4 +13,11 @@ class Room extends Model
         'name'
     ];
 
+    /**
+     * Get the room_user associated with the room
+     */
+    public function room_users()
+    {
+        return $this->hasMany('App\Models\RoomUser');
+    }
 }

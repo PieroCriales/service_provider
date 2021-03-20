@@ -48,4 +48,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Profile');
     }
+
+    /**
+     * Get the room_user associated with the user
+     */
+    public function room_users()
+    {
+        return $this->hasMany('App\Models\RoomUser');
+    }
 }

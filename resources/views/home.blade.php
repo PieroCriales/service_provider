@@ -19,6 +19,8 @@
             <tr>
                 <th>id</th>
                 <th>Salón de apuestas</th>
+                <th>Apostadores</th>
+                <th>Realizar apuesta</th>
             </tr>
             </thead>
 
@@ -26,8 +28,13 @@
             @foreach($rooms as $room)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-{{--                    <td> <a href="{{route('service.show', $service)}}">{{$service->title}}</a></td>--}}
-                    <td>{{ $room->name }}</td>
+                    <td> <a href="{{route('room_user.create', $room)}}">{{$room->name}}</a></td>
+                    <td>{{ $room->nro_gamblers }}</td>
+                    @if($room->nro_gamblers == 10)
+                        <td><a href="{{ route('game.create', $room) }}">Activado</a></td>
+                    @else
+                        <td>Desactivado</td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

@@ -32,3 +32,11 @@ Route::put('profile/update', [App\Http\Controllers\ProfileController::class, 'up
 /* Inicia ruta para eliminar usuario */
 Route::delete('user/delete', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 /* == Finaliza ruta para eliminar usuario == */
+
+/* Apostar */
+Route::get('/room_user/store/{room}', [App\Http\Controllers\RoomUserController::class, 'create'])->name('room_user.create')->middleware('auth');
+Route::post('/room_user', [App\Http\Controllers\RoomUserController::class, 'store'])->name('room_user.store')->middleware('auth');
+
+/* Realizacion del juego */
+Route::get('/game/{room}', [App\Http\Controllers\HistoryBetController::class, 'game'])->name('game.create')->middleware('auth');
+Route::post('/game', [App\Http\Controllers\HistoryBetController::class, 'store'])->name('game.store')->middleware('auth');

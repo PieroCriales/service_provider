@@ -20,6 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('address', 256)->nullable();
             $table->string('phone_number', 30)->nullable();
             $table->string('profession', 120)->nullable();
+            $table->integer('chips')->default(1000);
             $table->timestamps();
         });
     }
