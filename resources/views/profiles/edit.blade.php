@@ -7,6 +7,15 @@
 @stop
 
 @section('content')
+    @if(count($errors)>0)
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class = "container-fluid">
         <div class = "row">
             <div class = "col-md-3">
@@ -143,7 +152,7 @@
                                                     </td>
                                                     <td>
                                                     <a href="/purchase/{{$purchase->id}}/edit" class="">
-                                                      {{ $purchase->due_date }} 
+                                                      {{ $purchase->due_date }}
                                                     </a>
                                                     </td>
                                                     @if($purchase->customer_confirmation)
