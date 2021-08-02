@@ -28,13 +28,13 @@
                         <p class="text-muted text-center">{{ $profile->profession ?? '' }}</p>
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                              <b>Puntuacion </b> <a class="float-right">1,322</a>
+                              <b>Puntuacion </b> <a class="float-right">-</a>
                             </li>
                             <li class="list-group-item">
-                              <b>Seguidores</b> <a class="float-right">543</a>
+                              <b>Seguidores</b> <a class="float-right">-</a>
                             </li>
                             <li class="list-group-item">
-                              <b>Total servicios</b> <a class="float-right">20</a>
+                              <b>Total servicios</b> <a class="float-right">-</a>
                             </li>
                           </ul>
 
@@ -50,7 +50,7 @@
                       <strong><i class="fa fa-book margin-r-5"></i>Education</strong>
 
                       <p class="text-muted">
-                        Ingeniera de software UNMSM
+                        {{ $profile->profession ?? '' }}
                       </p>
 
                       <hr>
