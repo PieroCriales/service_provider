@@ -41,6 +41,16 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
+        $fields = [
+            'firstname'=> 'required|string|max:90',
+            'lastname'=> 'required|string|max:90',
+            'address'=> 'required|string|max:256',
+            'phone_number'=> 'required|string|max:30',
+            'profession'=> 'required|string|max:120',
+        ];
+        $message = ["required"=>' :attribute es requerido' ];
+        $this->validate($request, $fields, $message);
+
         $user = \Auth::user();
         $profile = Profile::create([
             'user_id' => \Auth::user()->id,

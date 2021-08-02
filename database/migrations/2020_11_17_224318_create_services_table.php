@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
 
             $table->string('title');
             $table->text('description');
-            $table->double('price', 8, 2);
+            $table->double('price', 10, 2);
             $table->string('picture_path')->nullable();
 
             $table->timestamps();

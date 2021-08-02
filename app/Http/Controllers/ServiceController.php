@@ -63,8 +63,8 @@ class ServiceController extends Controller
     {
         $fields = [
             'title'=> 'required|string|max:100',
-            'description'=> 'string',
-            'price'=> 'required|regex:/^[0-9]+(\.[0-9]{1,3})?$/',
+            'description'=> 'string|max:1000',
+            'price'=> 'required|regex:/^[0-9]+(\.[0-9]{1,3})?$/|max:7',
             'picture_path'=>'max:10000|mimes:jpeg,png,jpg'
         ];
         $message = ["required"=>' :attribute es requerido' ];
@@ -122,7 +122,7 @@ class ServiceController extends Controller
         $liked_id = array();
         $liked_posts = array();
         $like = null;
-        
+
         foreach ($service->posts as $post) {
             $like = Like::where([
                 ['user_id', \Auth::user()->id],
@@ -170,8 +170,8 @@ class ServiceController extends Controller
     {
         $fields = [
             'title'=> 'required|string|max:100',
-            'description'=> 'string',
-            'price'=> 'required|regex:/^[0-9]+(\.[0-9]{1,3})?$/',
+            'description'=> 'string|max:1000',
+            'price'=> 'required|regex:/^[0-9]+(\.[0-9]{1,3})?$/|max:7',
             'picture_path'=>'max:10000|mimes:jpeg,png,jpg'
         ];
 
