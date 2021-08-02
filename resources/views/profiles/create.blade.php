@@ -18,7 +18,7 @@
                     <div class="card-tools">
                         <!-- Buttons, labels, and many other things can be placed here! -->
                         <!-- Here is a label for example -->
-                        <span class="badge badge-primary">Opcional</span>
+                        <span class="badge badge-danger">Obligatorio</span>
                     </div>
                     <!-- /.card-tools -->
                 </div>
